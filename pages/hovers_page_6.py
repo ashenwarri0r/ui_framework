@@ -28,10 +28,10 @@ class HoversPage(BasePage):
             ActionChains(self.driver).move_to_element(self.user_1_avatar.native_element).perform()
         elif user == 2:
             self.user_2_avatar.wait_for_visible()
-            ActionChains(self.driver).move_to_element(self.user_2_avatar).perform()
+            ActionChains(self.driver).move_to_element(self.user_2_avatar.native_element).perform()
         elif user == 3:
             self.user_3_avatar.wait_for_visible()
-            ActionChains(self.driver).move_to_element(self.user_3_avatar).perform()
+            ActionChains(self.driver).move_to_element(self.user_3_avatar.native_element).perform()
         else:
             raise ValueError("Неверный user, доступны значения от 1 до 3")
         self.view_profile.wait_for_presence()
