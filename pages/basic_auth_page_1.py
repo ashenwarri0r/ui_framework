@@ -13,6 +13,6 @@ class BasicAuthPage(BasePage):
         self.success_message = WebElement(self.browser, self.SUCCESSFUL_AUTH,
                                           description="Basic Auth Page -> Success message")
 
-    def successful_auth(self):
+    def do_auth(self):
         self.success_message.wait_for_visible()
         return self.success_message.get_text()

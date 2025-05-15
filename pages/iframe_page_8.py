@@ -6,32 +6,34 @@ from elements.button import Button
 class IFramePage(BasePage):
     UNIQUE_ELEMENT = "//*[contains(@class, 'center') and text()='Frames']"
     NESTED_FRAMES = "//*[text()='Nested Frames']/.."
-    FRAMES_TEXT = "//*[@id='sampleHeading']"
+    FRAMES_TEXT = "sampleHeading"
     FRAME_1 = "frame1"
     FRAME_2 = "frame2"
 
     def __init__(self, browser):
         super().__init__(browser)
-        self.browser = browser
         self.unique_element = WebElement(self.browser, self.UNIQUE_ELEMENT)
         self.nested_frames_link = Button(self.browser, self.NESTED_FRAMES)
         self.frames_text = WebElement(self.browser, self.FRAMES_TEXT)
         self.frame1 = WebElement(self.browser, self.FRAME_1)
         self.frame2 = WebElement(self.browser, self.FRAME_2)
 
-
     def go_to_nested_frames(self):
         self.nested_frames_link.wait_for_presence()
         self.nested_frames_link.js_click()
 
-    def get_frames_text(self) -> tuple:
+    def get_frame1_text(self) -> str:
         self.browser.switch_to_frame(self.frame1)
-        frame_1_text = self.frames_text.wait_for_presence().text
+        frame_1_text = self.frames_text.get_text()
         self.browser.switch_to_default_content()
+        return frame_1_text
+
+    def get_frame2_text(self) -> str:
         self.browser.switch_to_frame(self.frame2)
-        frame_2_text = self.frames_text.wait_for_presence().text
+        frame_2_text = self.frames_text.get_text()
         self.browser.switch_to_default_content()
-        return frame_1_text, frame_2_text
+        return frame_2_text
+
 
 class NestedFramePage(BasePage):
     UNIQUE_ELEMENT = "//*[contains(@class, 'center') and text()='Nested Frames']"
@@ -43,7 +45,6 @@ class NestedFramePage(BasePage):
 
     def __init__(self, browser):
         super().__init__(browser)
-        self.browser = browser
         self.unique_element = WebElement(self.browser, self.UNIQUE_ELEMENT)
         self.frames_link = Button(self.browser, self.FRAMES)
         self.parent_frame = WebElement(self.browser, self.PARENT_FRAME)
@@ -55,10 +56,13 @@ class NestedFramePage(BasePage):
         self.frames_link.wait_for_presence()
         self.frames_link.js_click()
 
-    def check_frame_text(self) -> tuple:
+    def get_parent_frame_text(self) -> str:
         self.browser.switch_to_frame(self.parent_frame)
-        parent_text = self.parent_text.wait_for_presence().text
+        parent_text = self.parent_text.get_text()
+        return parent_text
+
+    def get_child_frame_text(self) -> str:
         self.browser.switch_to_frame(self.child_frame)
-        child_text = self.child_text.wait_for_presence().text
+        child_text = self.child_text.get_text()
         self.browser.switch_to_default_content()
-        return parent_text, child_text
+        return child_text

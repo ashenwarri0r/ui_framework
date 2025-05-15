@@ -55,16 +55,11 @@ class BaseElement:
             Logger.error(f"{self}: {err}")
             raise
 
-    def wait_for_presence(self) -> WebElement:
-        return self._wait_for(expected_condition=expected_conditions.presence_of_element_located)
+    def wait_for_presence(self, timeout=None) -> WebElement:
+        return self._wait_for(expected_conditions.presence_of_element_located)
 
-    def wait_for_absence(self) -> WebElement:
+    def wait_for_absence(self):
         return self._wait_for_not(expected_condition=expected_conditions.presence_of_element_located)
-
-    def wait_for_presence_all_elements(self) -> list[WebElement]:
-        elements = self._wait.until(
-            expected_conditions.presence_of_all_elements_located(self.locator))
-        return elements
 
     def wait_for_clickable(self) -> WebElement:
         return self._wait_for(expected_condition=expected_conditions.element_to_be_clickable)
@@ -72,9 +67,11 @@ class BaseElement:
     def wait_for_visible(self) -> WebElement:
         return self._wait_for(expected_condition=expected_conditions.visibility_of_element_located)
 
-    def does_exist(self):
+    def is_existing(self, timeout=None) -> bool:
         try:
-            self.wait_for_presence()
+            new_timeout = timeout if timeout is not None else self.timeout
+            wait = WebDriverWait(self.browser.driver, new_timeout)
+            wait.until(expected_conditions.presence_of_element_located(self.locator))
             return True
         except TimeoutException:
             return False

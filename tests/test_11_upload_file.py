@@ -1,18 +1,27 @@
 from pages.file_upload_page_11 import FileUploadPage
+from pathlib import Path
+
+from tests.test_12_upload_dialog_window import FILE_NAME
+
+CURRENT_DIR = Path(__file__).parent
+PROJECT_ROOT = CURRENT_DIR.parent
+FILE_PATH = PROJECT_ROOT / f"{FILE_NAME}"
 
 UPLOAD_PAGE_URL = "https://the-internet.herokuapp.com/upload"
 FILE_NAME = "image_for_upload.jpg"
-FILE_PATH = fr"C:\Users\ASHEN\PycharmProjects\UI Framework\{FILE_NAME}"
 CONFIRMATION_TEXT = "File Uploaded!"
+
 
 def test_upload_file(browser):
     upload_page = FileUploadPage(browser)
 
     browser.get(UPLOAD_PAGE_URL)
     upload_page.wait_for_open()
-    upload_page.upload_file(FILE_PATH)
+    upload_page.upload_file(str(FILE_PATH))
 
-    text, file_name = upload_page.verify_upload()
+    result = upload_page.get_file_upload_result()
+    text = result['text']
+    file_name = result['file_name']
 
     assert text == f'{CONFIRMATION_TEXT}' and file_name == f'{FILE_NAME}', \
         (f"Ожидаемое сообщение: {CONFIRMATION_TEXT} и имя файла: {FILE_NAME}"

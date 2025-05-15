@@ -1,11 +1,11 @@
 from pages.slider_page_5 import SliderPage
 from random import randint
 
-
 SLIDER_PAGE_URL = "https://the-internet.herokuapp.com/horizontal_slider"
 number = randint(-4, 4)
 INITIAL_VALUE = 2.5
 EXPECTED_VALUE = INITIAL_VALUE + number * 0.5
+
 
 def test_actions(browser):
     slider_page = SliderPage(browser)

@@ -1,6 +1,7 @@
 import logging
 import os
 
+
 class LoggerConfig:
     LOGS_DIR_NAME = 'logs'
     LOGGER_NAME = 'Logger'
@@ -10,5 +11,3 @@ class LoggerConfig:
     BACKUP_COUNT = 10
     FORMAT = '%(asctime)s - %(levelname)s - %(message)s'
     DATE_FORMAT = '%Y/%m/%dT%H:%M:%S'
-
-    

@@ -5,7 +5,7 @@ from elements.button import Button
 
 class JavascriptAlertsPage(BasePage):
     UNIQUE_ELEMENT = "result"
-    RESULT_FIELD = "//*[@id='result'][text()]"
+    RESULT_FIELD = "result"
     JS_ALERT = "//*[@onclick='jsAlert()']"
     JS_CONFIRM = "//*[@onclick='jsConfirm()']"
     JS_PROMPT = "//*[@onclick='jsPrompt()']"
@@ -19,23 +19,20 @@ class JavascriptAlertsPage(BasePage):
         self.js_confirm_button = Button(self.browser, self.JS_CONFIRM)
         self.js_prompt_button = Button(self.browser, self.JS_PROMPT)
 
-    #Опциональный параметр js позволяет вызвать JavaScript-click вместо обычного
+    # Опциональный параметр js позволяет вызвать JavaScript-click вместо обычного
     def click_js_alert(self, js=False):
-        self.js_alert_button.wait_for_clickable()
-        if not js:
-            self.js_alert_button.click()
-        else:
+        if js:
             self.js_alert_button.js_click()
+        else:
+            self.js_alert_button.click()
 
     def click_js_confirm(self, js=False):
-        self.js_alert_button.wait_for_clickable()
         if not js:
             self.js_confirm_button.click()
         else:
             self.js_confirm_button.js_click()
 
     def click_js_prompt(self, js=False):
-        self.js_alert_button.wait_for_clickable()
         if not js:
             self.js_prompt_button.click()
         else:

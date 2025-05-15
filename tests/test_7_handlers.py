@@ -1,8 +1,8 @@
 from pages.handlers_page_7 import HandlersPage, NewWindowPage
 
-
 HANDLERS_PAGE_LINK = "http://the-internet.herokuapp.com/windows"
 WINDOW_NAME = "New Window"
+
 
 def test_handlers(browser):
     handlers_page = HandlersPage(browser)

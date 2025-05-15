@@ -16,7 +16,6 @@ class SliderPage(BasePage):
         self.slider_value = WebElement(self.browser, self.SLIDER_VALUE)
 
     def move_slider(self, number: int):
-        self.slider.wait_for_clickable()
         self.slider.click()
 
         direction = Keys.ARROW_RIGHT if number > 0 else Keys.ARROW_LEFT

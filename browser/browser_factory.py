@@ -3,8 +3,10 @@ from selenium import webdriver
 from logger.logger import Logger
 from selenium.webdriver.remote.webdriver import WebDriver
 
+
 class AvailableDriverNames(StrEnum):
     CHROME = "chrome"
+
 
 class BrowserFactory:
     @staticmethod

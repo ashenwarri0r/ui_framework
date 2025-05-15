@@ -2,6 +2,7 @@ from selenium.common import WebDriverException
 from logger.logger import Logger
 from elements.base_element import BaseElement
 
+
 class Input(BaseElement):
     def clear(self):
         element = self.wait_for_visible()

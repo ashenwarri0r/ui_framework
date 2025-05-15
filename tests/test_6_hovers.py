@@ -4,6 +4,7 @@ import pytest
 HOVERS_PAGE_URL = "https://the-internet.herokuapp.com/hovers"
 BASE_USER_LINK = "https://the-internet.herokuapp.com/users/"
 
+
 @pytest.mark.parametrize("user_id", [1, 2, 3])
 def test_hovers_page(browser, user_id):
     hovers_page = HoversPage(browser)

@@ -3,6 +3,7 @@ from pages.infinite_scroll_page_10 import InfiniteScrollPage
 INFINITE_SCROLL_PAGE_URL = "https://the-internet.herokuapp.com/infinite_scroll"
 AGE_OF_THE_ENGINEER = 24
 
+
 def test_infinite_scroll(browser):
     infinite_scroll_page = InfiniteScrollPage(browser)
 

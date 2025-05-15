@@ -115,6 +115,10 @@ class Browser:
     def wait_alert_closed(self):
         Logger.info(f"{self}: wait for alert to close")
         self._wait.until_not(expected_conditions.alert_is_present())
+
+    def is_alert_closed(self):
+        Logger.info(f"{self}: wait for alert to close")
+        self._wait.until_not(expected_conditions.alert_is_present())
         return True
 
     def switch_to_alert(self):
@@ -143,4 +147,3 @@ class Browser:
 
     def __repr__(self) -> str:
         return str(self)
-
