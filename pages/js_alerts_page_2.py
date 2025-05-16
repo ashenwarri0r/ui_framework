@@ -27,16 +27,16 @@ class JavascriptAlertsPage(BasePage):
             self.js_alert_button.click()
 
     def click_js_confirm(self, js=False):
-        if not js:
-            self.js_confirm_button.click()
-        else:
+        if js:
             self.js_confirm_button.js_click()
+        else:
+            self.js_confirm_button.click()
 
     def click_js_prompt(self, js=False):
-        if not js:
-            self.js_prompt_button.click()
-        else:
+        if js:
             self.js_prompt_button.js_click()
+        else:
+            self.js_prompt_button.click()
 
     def get_result_text(self):
         self.result_field.wait_for_visible()

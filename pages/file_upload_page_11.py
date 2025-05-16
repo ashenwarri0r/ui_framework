@@ -42,11 +42,9 @@ class FileUploadPage(BasePage):
         result['file_name'] = self.file_name_field.get_text()
         return result
 
-    def upload_dialog_window(self, file_path):
+    def click_for_dialog_window(self):
         self.drag_drop_area.wait_for_visible()
         self.drag_drop_area.click()
-        self.hidden_input.wait_for_presence()
-        self.hidden_input.send_keys(file_path, clear=False, visible=False)
 
     def verify_dialog_window_upload(self):
         self.success_mark.wait_for_presence()
