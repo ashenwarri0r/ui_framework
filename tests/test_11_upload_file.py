@@ -1,13 +1,9 @@
 from pages.file_upload_page_11 import FileUploadPage
-from pathlib import Path
 
-CURRENT_DIR = Path(__file__).parent
-PROJECT_ROOT = CURRENT_DIR.parent
 
 UPLOAD_PAGE_URL = "https://the-internet.herokuapp.com/upload"
 FILE_NAME = "image_for_upload.jpg"
 CONFIRMATION_TEXT = "File Uploaded!"
-FILE_PATH = PROJECT_ROOT / f"{FILE_NAME}"
 
 
 def test_upload_file(browser):
@@ -15,7 +11,7 @@ def test_upload_file(browser):
 
     browser.get(UPLOAD_PAGE_URL)
     upload_page.wait_for_open()
-    upload_page.upload_file(str(FILE_PATH))
+    upload_page.upload_file(f"{FILE_NAME}")
 
     result = upload_page.get_file_upload_result()
     text = result['text']

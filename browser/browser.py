@@ -1,5 +1,5 @@
 import time
-from selenium.common import WebDriverException
+from selenium.common import WebDriverException, TimeoutException
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -118,7 +118,10 @@ class Browser:
 
     def is_alert_closed(self):
         Logger.info(f"{self}: wait for alert to close")
-        self._wait.until_not(expected_conditions.alert_is_present())
+        try:
+            self._wait.until_not(expected_conditions.alert_is_present())
+        except TimeoutException:
+            return False
         return True
 
     def switch_to_alert(self):

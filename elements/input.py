@@ -18,13 +18,10 @@ class Input(BaseElement):
         Logger.info(f"{self}: js clear")
         self.browser.execute_script("arguments[0].value = ''", element)
 
-    def send_keys(self, keys: str, clear: bool = True, visible: bool = True) -> None:
+    def send_keys(self, keys: str, clear: bool = True) -> None:
         if clear:
             self.clear()
-        if visible is True:
-            element = self.wait_for_visible()
-        elif visible is False:
-            element = self.wait_for_presence()
+        element = self.wait_for_visible()
         Logger.info(f"{self}: send keys = '{keys}'")
         try:
             element.send_keys(keys)
