@@ -2,6 +2,9 @@ from pages.file_upload_page_11 import FileUploadPage
 import os
 import sys
 import pytest
+
+pytest.skip("Не поддерживается на Linux‑контейнерах", allow_module_level=True) \
+    if sys.platform == "linux" else None
 from utils.pyautogui import PyAutogui
 
 UPLOAD_PAGE_URL = "https://the-internet.herokuapp.com/upload"
@@ -11,7 +14,7 @@ CURRENT_SCRIPT_PATH = os.path.abspath(__file__)
 project_dir = os.path.dirname(os.path.dirname(CURRENT_SCRIPT_PATH))
 FILE_PATH = os.path.join(project_dir, FILE_NAME)
 
-@pytest.mark.skipif(sys.platform == "linux", reason="Тест не поддерживается на Linux")
+
 def test_upload_dialog_window(browser):
     upload_page = FileUploadPage(browser)
     pyautogui = PyAutogui()
