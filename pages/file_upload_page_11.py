@@ -2,7 +2,6 @@ from .base_page import BasePage
 from elements.web_element import WebElement
 from elements.button import Button
 from elements.input import Input
-from collections import namedtuple
 
 
 class FileUploadPage(BasePage):
