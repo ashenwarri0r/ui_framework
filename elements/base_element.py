@@ -55,7 +55,7 @@ class BaseElement:
             Logger.error(f"{self}: {err}")
             raise
 
-    def wait_for_presence(self, timeout=None) -> WebElement:
+    def wait_for_presence(self) -> WebElement:
         return self._wait_for(expected_conditions.presence_of_element_located)
 
     def wait_for_absence(self):
@@ -72,8 +72,10 @@ class BaseElement:
             new_timeout = timeout if timeout is not None else self.timeout
             wait = WebDriverWait(self.browser.driver, new_timeout)
             wait.until(expected_conditions.presence_of_element_located(self.locator))
+            Logger.info(f"Element {self} exists")
             return True
         except TimeoutException:
+            Logger.info(f"Element {self} doesn't exist")
             return False
 
     def click(self) -> None:
