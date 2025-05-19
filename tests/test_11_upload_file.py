@@ -15,7 +15,7 @@ def test_upload_file(browser):
 
     browser.get(UPLOAD_PAGE_URL)
     upload_page.wait_for_open()
-    upload_page.upload_file(f"{FILE_NAME}")
+    upload_page.upload_file(f"{FILE_PATH}")
 
     result = upload_page.get_file_upload_result()
     text = result['text']
